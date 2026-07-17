@@ -1,1 +1,3 @@
-model.safetensors
+# Assembled weights (reconstructed locally by assemble*.sh) — never commit these.
+# The split *.part-* pieces ARE committed; the reassembled files are not.
+*.safetensors

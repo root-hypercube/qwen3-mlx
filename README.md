@@ -34,6 +34,21 @@ The split parts can be deleted after assembly if you need the disk space back
 (`rm model.safetensors.part-*`), at the cost of re-cloning if you ever need to
 reassemble.
 
+## Additional model: Qwen3-14B-MLX-4bit
+
+A larger 4-bit model (~8.3 GB, ~8.4 GB RAM at inference — fits a 24 GB machine)
+lives under `Qwen3-14B-MLX-4bit/`, split the same way (its two safetensors shards
+become `.part-*` pieces). Restore it with the generic assembler:
+
+```bash
+sh assemble-model.sh Qwen3-14B-MLX-4bit      # reassembles both shards + verifies
+mlx_lm.generate --model Qwen3-14B-MLX-4bit --prompt "hello"
+```
+
+`assemble-model.sh` reads each model dir's `PARTS.manifest` (`<sha256>  <file>`
+per line) and reconstructs + checksum-verifies every original file. Source:
+`lmstudio-community/Qwen3-14B-MLX-4bit` (Apache-2.0).
+
 ---
 
 # Original model card: lmstudio-community/Qwen3-1.7B-MLX-bf16
